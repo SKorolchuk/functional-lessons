@@ -1,0 +1,9 @@
+﻿@model IList<Web.Models.TestModel>
+
+@for (var i = 0; i < Model.Count; i++)
+{
+	<div>
+		<span>@i</span>
+		<strong>@Model[i].Id</strong>
+	</div>
+}
