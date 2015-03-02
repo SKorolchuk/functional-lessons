@@ -5,52 +5,49 @@
     open System.Windows.Forms
     open System.Collections.Generic
     open System.Linq
-
-    let rec fact (a: int) =
-        match a with
-            | _ when a <= 1 -> 1
-            | _ when a > 1 -> a*fact(a-1)
-            | _ -> 0
-
-    let initForm (title: string) =
-        new Form(Text = title, Width = 200, Height = 200)
-
-    let sampleFunc (a: int, b: int, c: int) =
-        (a,b,c)
-
-    let checkExitKey (key: char) =
-        match key with
-            | _ when key = 'w' -> true
-            | _ when key = 'x' -> true
-            | _ -> false
+    open Tree
+    open Vector
 
     [<EntryPoint>]
     let main(args: string[]) =
-        printfn "Press button:"
-        let key = Console.ReadKey()
-        let a1,a2,a3 = sampleFunc(1,2,3)
-        let checkRes = checkExitKey key.KeyChar
-
-        let sampleFactParam : int = 5
-        let res = fact(sampleFactParam)
-        printfn "a1: %d a2: %d a2: %d you pressed key: %b factorial of %d is %d" a1 a2 a3 checkRes sampleFactParam res
+        BookSamples.sampleInputExample
 
         match BookSamples.fetch("http://tut.by") with
             | BookSamples.Some text -> printfn "%s" text
             | BookSamples.None -> printfn ""
 
-        //let sampleForm = initForm("sample form")
-        //sampleForm.ShowDialog();
+        BookSamples.simpleListProcessing
 
-        let rand = new System.Random((int)DateTime.Now.Ticks)
+        let treeStruct =
+            Children ("root",
+                [
+                    Children ("s1",
+                        [
+                            Node "a";
+                            Node "b"
+                        ]
+                    );
+                    Children ("s2",
+                        [
+                            Node "c";
+                            Node "d"
+                        ]
+                    );
+                ])
 
-        let liste = [0..10]
-        
-        let trail l = 
-            List.map (fun i -> rand.Next()) l
+        let result = Tree.check treeStruct 0
 
-        liste 
-        |> trail 
-        |> List.iter (fun i -> printfn "%d" i)
+        let sampleVect = new Vector.Vector4(1.,2.,3.,4.)
 
+        let anotherVect = new Vector.Vector4(2.,3.,0.,7.)
+
+        let sumVect = sampleVect + anotherVect;
+
+        let mulSubject = sampleVect * anotherVect;
+
+        printfn "sampleVect: %s \n length of sampleVect: %f \n sumVect: %s \n mulSubject: %f" 
+            (sampleVect |> Vector.Vector4.ToString)
+            !!sampleVect
+            (sumVect |> Vector.Vector4.ToString)
+            mulSubject
         0
