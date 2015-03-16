@@ -1,4 +1,4 @@
-﻿module Vector
+﻿module InitialLesson.Vector
 
 open System
 

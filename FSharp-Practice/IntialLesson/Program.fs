@@ -6,7 +6,7 @@
     open System.Collections.Generic
     open System.Linq
     open Tree
-    open Vector
+    open InitialLesson.Vector
 
     [<EntryPoint>]
     let main(args: string[]) =
@@ -37,17 +37,20 @@
 
         let result = Tree.check treeStruct 0
 
-        let sampleVect = new Vector.Vector4(1.,2.,3.,4.)
+        let sampleVect = new Vector4(1.,2.,3.,4.)
 
-        let anotherVect = new Vector.Vector4(2.,3.,0.,7.)
+        let anotherVect = new Vector4(2.,3.,0.,7.)
 
         let sumVect = sampleVect + anotherVect;
 
         let mulSubject = sampleVect * anotherVect;
 
         printfn "sampleVect: %s \n length of sampleVect: %f \n sumVect: %s \n mulSubject: %f" 
-            (sampleVect |> Vector.Vector4.ToString)
+            (sampleVect |> Vector4.ToString)
             !!sampleVect
-            (sumVect |> Vector.Vector4.ToString)
+            (sumVect |> Vector4.ToString)
             mulSubject
+
+        AkkaSetup.main()
+
         0
